@@ -1,0 +1,63 @@
+---
+title: "Assignment 1"
+author: "David Merten-Jones"
+date: January 31, 2019
+output: html_notebook
+---
+
+1.) Using the base functions in R write some code to split the string below into a vector where each word is a separate element:
+
+```{r}
+base_string <- 'the;;cat;;in;;the;;hat'
+strsplit(base_string, ';;')
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+
+2.) Simulate rolling a die by using the command runif. Roll the die 1000 times and generate a histogram of your results.
+
+```{r}
+rolls=1000
+min=1
+max=6
+x <- as.integer(runif(rolls,min,max+1))
+hist(x,main=('1000 die rolls'),breaks=seq(min-.5,max+.5,1))          
+
+```
+
+3.) \textbf{20 Points} Simulate 1,000 draws from two random normal distributions. The first normal distribution will have a mean of 24 ($\mu_{x} = 24$) and a standard deviation of 3 ($\sigma_{x} = 32$). The second normal distriubtion will have a mean of 212 ($\mu_{y} = 212$) and a standard deviation of 24 ($\sigma_{y} = 24$). Add the data from the two distributions together and store the results in a vector. Genearte a histogram of the data in your new vector with a color of your choice. What is the mean and standard deviation of the data in the new vector?
+
+Hint: $N(\mu_{x},\sigma_{x}^{2}) + N(\mu_{y},\sigma_{y}^{2}) \sim N(\mu_{x}+\mu_{y},\sigma_{x}^{2}+\sigma_{y}^{2})$
+
+```{r}
+dist1 <- rnorm(1000,mean = 24,sd = 3)
+dist2 <- rnorm(1000,mean = 212,sd = 24)
+
+distsum = dist1 + dist2
+hist(distsum, main='Histogram of Combined Distributions (50 bins)',col='darkcyan',breaks=50)
+```
+
+```{r}
+print("Mean:")
+mean(distsum)
+print("Standard Deviation:")
+sd(distsum)
+```
+
+
+Higher Granularity:
+
+```{r}
+hist(distsum, main='Histogram of Combined Distributions (bins = min/max) ',col='darkcyan',breaks=seq(min(distsum)-1,max(distsum)+1,1))
+```
+
+4) \textbf{10 Points} Using the random data you generated in question 3, create a scatter plot where the data from random vector one will be along the x-axis and the data from random vector two will be along the y-axis. Give the x-axis label the title 'Random Vector 1' and give the y-axis label the title 'Random Vector 2'. Set the color of the points to blue and make sure the points in your scatter plot are filled in (Hint: see the pch option of plots).
+
+```{r}
+plot(dist1, dist2, main='Scatterplot of Random Vectors 1 & 2', xlab='Random Vector 1', ylab='Random Vector 2', col = rgb(red=0,green=0,blue=1,alpha=0.5), pch=16)
+```
