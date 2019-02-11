@@ -1,2 +1,3 @@
-# R
-Learning how to use R
+# ECON 328
+
+Files for graduate programming class
